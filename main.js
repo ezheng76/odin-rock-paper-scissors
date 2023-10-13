@@ -1,18 +1,31 @@
 
-const playerButtons = document.querySelectorAll('button');
-const container = document.querySelector('.container');
-// we use the .forEach method to iterate through each button
-playerButtons.forEach((button) => {
-  // and for each one we add a 'click' listener
-    button.addEventListener('click', () => {
-        var computerSelection = getComputerChoice()
-        var result = playRound(button.id, computerSelection);
+const playerButtons = document.querySelectorAll('.choice');
+const playerChoice = document.querySelector('.player-choice');
+const computerChoice = document.querySelector('.computer-choice');
+const gameResult = document.querySelector('.result');
 
-        const content = document.createElement('div');
-        content.classList.add('result');
-        
-        content.innerHTML = "Your Selection: " + button.id  + "<br> Computer Selection: " + computerSelection + "<br> " + result;
-        container.appendChild(content);
+playerButtons.forEach((img) => {
+    img.addEventListener('click', () => {
+        var computerSelection = getComputerChoice()
+        var result = playRound(img.id, computerSelection);
+
+        if (img.id === 'rock'){
+            playerChoice.innerHTML = '<img class="choice" id="rock" src="images/rock-icon.png" width="30px" height="auto">';
+        } else if (img.id === 'paper'){
+            playerChoice.innerHTML = '<img class="choice" id="paper" src="images/paper-icon.png" width="30px" height="auto">';
+        } else {
+            playerChoice.innerHTML = '<img class="choice" id="scissors" src="images/scissors-icon.png" width="30px" height="auto">';
+        }
+
+        if (computerSelection === 'rock'){
+            computerChoice.innerHTML = '<img class="choice" id="rock" src="images/rock-icon.png" width="30px" height="auto">';
+        } else if (computerSelection === 'paper'){
+            computerChoice.innerHTML = '<img class="choice" id="paper" src="images/paper-icon.png" width="30px" height="auto">';
+        } else {
+            computerChoice.innerHTML = '<img class="choice" id="scissors" src="images/scissors-icon.png" width="30px" height="auto">';
+        }
+
+        gameResult.innerHTML = result;
         
     });
 });
@@ -29,21 +42,21 @@ function getComputerChoice () {
 function playRound(playerSelection, computerSelection) {
     if (playerSelection == "rock"){
         if (computerSelection == "paper"){
-            return "You Lose! Paper beats Rock!"
+            return "You Lose! <br> Paper beats Rock!"
         } else if (computerSelection == "scissors"){
-            return "You Win! Rock beats Scissors!"
+            return "You Win! <br> Rock beats Scissors!"
         }
     }else if (playerSelection == "scissors") {
         if (computerSelection == "paper"){
-            return "You Win! Scissors beats Paper!"
+            return "You Win! <br> Scissors beats Paper!"
         } else if (computerSelection == "rock"){
-            return "You Lose! Rock beats Scissors!"
+            return "You Lose! <br> Rock beats Scissors!"
         }
     } else if (playerSelection == "paper"){
         if (computerSelection == "rock"){
-            return "You Win! Paper beats Rock!"
+            return "You Win! <br> Paper beats Rock!"
         } else if (computerSelection == "scissors"){
-            return "You Lose! Scissors beats Paper!"
+            return "You Lose! <br> Scissors beats Paper!"
         }
     } 
     return "Tie!"

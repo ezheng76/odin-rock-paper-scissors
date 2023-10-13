@@ -8,7 +8,7 @@
     <script src="https://kit.fontawesome.com/f89b5b7e10.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="style.css" >
 </head>
-<body>
+<body class="hide-scrollbar">
     <div class="header">
         Rock Paper Scissors
     </div>
@@ -22,33 +22,31 @@
     <div class="display-board">
         <div class="player">
             <img src="images/player-icon.png" width="200px" height="auto">
+            <div class="left-player-score">
+                0
+            </div>
         </div>
         <div class="vs">
             <img src="images/versus-icon.png" width="100px" height="auto">
         </div>
         <div class="computer">
             <img src="images/robot-icon.png" width="200px" height="auto">
+            <div class="right-player-score">
+                0
+            </div>
         </div>
     </div>
 
-    <div class="scores">
-        <div class="left-player">
-
-        </div>
-        <div class="right-player">
-            
-        </div>
+    <div class="game-result">
+        <div class="player-choice"></div>
+        <div class="result"></div>
+        <div class="computer-choice"></div>
     </div>
 
     <div class="choice-section">
-        <img id="rock" src="images/rock-icon.png" width="80px" height="auto">
-        <img id="paper" src="images/paper-icon.png" width="80px" height="auto">
-        <img id="scissors" src="images/scissors-icon.png" width="80px" height="auto">
-        
-    </div>
-    
-
-    <div class="container">
+        <img class="choice" id="rock" src="images/rock-icon.png" width="80px" height="auto">
+        <img class="choice" id="paper" src="images/paper-icon.png" width="80px" height="auto">
+        <img class="choice" id="scissors" src="images/scissors-icon.png" width="80px" height="auto">
         
     </div>
     
