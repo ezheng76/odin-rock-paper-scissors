@@ -1,3 +1,25 @@
+
+const playerButtons = document.querySelectorAll('button');
+const container = document.querySelector('.container');
+// we use the .forEach method to iterate through each button
+playerButtons.forEach((button) => {
+  // and for each one we add a 'click' listener
+    button.addEventListener('click', () => {
+        var computerSelection = getComputerChoice()
+        var result = playRound(button.id, computerSelection);
+
+        const content = document.createElement('div');
+        content.classList.add('result');
+        
+        content.innerHTML = "Your Selection: " + button.id  + "<br> Computer Selection: " + computerSelection + "<br> " + result;
+        container.appendChild(content);
+        
+    });
+});
+
+
+
+
 function getComputerChoice () {
     const options = ["rock", "paper", "scissors"]
     let randomNum = Math.floor(Math.random() * 3)
@@ -27,7 +49,6 @@ function playRound(playerSelection, computerSelection) {
     return "Tie!"
     
 }
-
 
 
 // function game (){
