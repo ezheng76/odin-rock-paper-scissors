@@ -28,14 +28,16 @@ function playRound(playerSelection, computerSelection) {
     
 }
 
-function game (){
-    for (let i = 1; i <= 5; i ++){
-        let playerSelection = window.prompt("Choose one: Rock, Paper, or Scissors").toLowerCase();
-        let computerSelection = getComputerChoice()
-        console.log("Game " + i + "\n") 
-        console.log("Your Selection: " + playerSelection + " \n" + "Computer Selection: " + computerSelection)
-        console.log(playRound(playerSelection, computerSelection))
-    }
-}
 
-game()
+
+// function game (){
+//     //for (let i = 1; i <= 5; i ++){
+//         let playerSelection = window.prompt("Choose one: Rock, Paper, or Scissors").toLowerCase();
+//         let computerSelection = getComputerChoice()
+//         console.log("Game " + i + "\n") 
+//         console.log("Your Selection: " + playerSelection + " \n" + "Computer Selection: " + computerSelection)
+//         console.log(playRound(playerSelection, computerSelection))
+//     //}
+// }
+
+// game()
