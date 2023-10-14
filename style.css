@@ -20,17 +20,11 @@ body{
     text-align: center;
 }
 
-.game-mode{
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 25px;
+p{
+    text-align: center;
+    font-size: x-large;
+    
 }
-
-.game-mode button{
-    background-color: #bca37f;
-    font-size: large;
-} 
 
 .display-board{
     display: flex;
@@ -50,12 +44,12 @@ body{
 
 .game-result{
     font-size: large;
-    /* padding: 15px; */
+    height: 40px;
     margin: 80px;
     display: flex;
     justify-content: space-evenly;
     flex: 0 0 200px;
-    gap: 35px;
+    gap: 55px;
 }
 
 .game-result .result{

@@ -1,77 +1,101 @@
+const playerButtons = document.querySelectorAll(".choice");
+const playerChoice = document.querySelector(".player-choice");
+const computerChoice = document.querySelector(".computer-choice");
+const gameResult = document.querySelector(".result");
+let playerScore = document.querySelector(".left-player-score");
+let computerScore = document.querySelector(".right-player-score");
+const gameModes = document.querySelectorAll(".game-mode-button");
 
-const playerButtons = document.querySelectorAll('.choice');
-const playerChoice = document.querySelector('.player-choice');
-const computerChoice = document.querySelector('.computer-choice');
-const gameResult = document.querySelector('.result');
+function resetScores (){
+    playerScore.innerHTML = 0;
+    computerScore.innerHTML = 0;
+    gameResult.innerHTML = "";
+    playerChoice.innerHTML = "";
+    computerChoice.innerHTML = "";
+}
+
 
 playerButtons.forEach((img) => {
-    img.addEventListener('click', () => {
-        var computerSelection = getComputerChoice()
+    img.addEventListener("click", () => {
+        var computerSelection = getComputerChoice();
         var result = playRound(img.id, computerSelection);
-
-        if (img.id === 'rock'){
-            playerChoice.innerHTML = '<img class="choice" id="rock" src="images/rock-icon.png" width="30px" height="auto">';
-        } else if (img.id === 'paper'){
-            playerChoice.innerHTML = '<img class="choice" id="paper" src="images/paper-icon.png" width="30px" height="auto">';
-        } else {
-            playerChoice.innerHTML = '<img class="choice" id="scissors" src="images/scissors-icon.png" width="30px" height="auto">';
+        updateResult(img.id, computerSelection, result);
+        if (gameOver()){
+            if (parseInt(playerScore.innerHTML) === 3){
+                alert("You Win!");
+            } else {
+                alert("You Lose!");
+            }
+            resetScores();
         }
-
-        if (computerSelection === 'rock'){
-            computerChoice.innerHTML = '<img class="choice" id="rock" src="images/rock-icon.png" width="30px" height="auto">';
-        } else if (computerSelection === 'paper'){
-            computerChoice.innerHTML = '<img class="choice" id="paper" src="images/paper-icon.png" width="30px" height="auto">';
-        } else {
-            computerChoice.innerHTML = '<img class="choice" id="scissors" src="images/scissors-icon.png" width="30px" height="auto">';
-        }
-
-        gameResult.innerHTML = result;
-        
     });
 });
 
+function updateResult (pChoice, cChoice, roundResult){
+    if (pChoice === "rock") {
+        playerChoice.innerHTML = '<img class="choice" id="rock" src="images/rock-icon.png" width="30px" height="auto">';
+    } else if (pChoice === "paper") {
+        playerChoice.innerHTML = '<img class="choice" id="paper" src="images/paper-icon.png" width="30px" height="auto">';
+    } else {
+        playerChoice.innerHTML = '<img class="choice" id="scissors" src="images/scissors-icon.png" width="30px" height="auto">';
+    }
 
+    if (cChoice === "rock") {
+        computerChoice.innerHTML = '<img class="choice" id="rock" src="images/rock-icon.png" width="30px" height="auto">';
+    } else if (cChoice === "paper") {
+        computerChoice.innerHTML = '<img class="choice" id="paper" src="images/paper-icon.png" width="30px" height="auto">';
+    } else {
+        computerChoice.innerHTML = '<img class="choice" id="scissors" src="images/scissors-icon.png" width="30px" height="auto">';
+    }
 
-
-function getComputerChoice () {
-    const options = ["rock", "paper", "scissors"]
-    let randomNum = Math.floor(Math.random() * 3)
-    return options[randomNum];
+    gameResult.innerHTML = roundResult;
+}
+function getComputerChoice() {
+  const options = ["rock", "paper", "scissors"];
+  let randomNum = Math.floor(Math.random() * 3);
+  return options[randomNum];
 }
 
 function playRound(playerSelection, computerSelection) {
-    if (playerSelection == "rock"){
-        if (computerSelection == "paper"){
-            return "You Lose! <br> Paper beats Rock!"
-        } else if (computerSelection == "scissors"){
-            return "You Win! <br> Rock beats Scissors!"
-        }
-    }else if (playerSelection == "scissors") {
-        if (computerSelection == "paper"){
-            return "You Win! <br> Scissors beats Paper!"
-        } else if (computerSelection == "rock"){
-            return "You Lose! <br> Rock beats Scissors!"
-        }
-    } else if (playerSelection == "paper"){
-        if (computerSelection == "rock"){
-            return "You Win! <br> Paper beats Rock!"
-        } else if (computerSelection == "scissors"){
-            return "You Lose! <br> Scissors beats Paper!"
-        }
-    } 
-    return "Tie!"
-    
+  let result = "";
+  console.log(playerSelection + " " + computerSelection);
+  if (playerSelection == "rock") {
+    if (computerSelection == "paper") {
+      result = "You Lose! <br> Paper beats Rock!";
+      computerScore.innerHTML = parseInt(computerScore.innerHTML) + 1;
+    } else if (computerSelection == "scissors") {
+      result = "You Win! <br> Rock beats Scissors!";
+      playerScore.innerHTML = parseInt(playerScore.innerHTML) + 1;
+    } else {
+      result = "Tie!";
+    }
+  } else if (playerSelection == "scissors") {
+    if (computerSelection == "paper") {
+      result = "You Win! <br> Scissors beats Paper!";
+      playerScore.innerHTML = parseInt(playerScore.innerHTML) + 1;
+    } else if (computerSelection == "rock") {
+      result = "You Lose! <br> Rock beats Scissors!";
+      computerScore.innerHTML = parseInt(computerScore.innerHTML) + 1;
+    } else {
+        result = "Tie!";
+    }
+  } else if (playerSelection == "paper") {
+    if (computerSelection == "rock") {
+      result = "You Win! <br> Paper beats Rock!";
+      playerScore.innerHTML = parseInt(playerScore.innerHTML) + 1;
+    } else if (computerSelection == "scissors") {
+      result = "You Lose! <br> Scissors beats Paper!";
+      computerScore.innerHTML = parseInt(computerScore.innerHTML) + 1;
+    } else {
+        result = "Tie!";
+    }
+  }
+  return result;
 }
 
-
-// function game (){
-//     //for (let i = 1; i <= 5; i ++){
-//         let playerSelection = window.prompt("Choose one: Rock, Paper, or Scissors").toLowerCase();
-//         let computerSelection = getComputerChoice()
-//         console.log("Game " + i + "\n") 
-//         console.log("Your Selection: " + playerSelection + " \n" + "Computer Selection: " + computerSelection)
-//         console.log(playRound(playerSelection, computerSelection))
-//     //}
-// }
-
-// game()
+function gameOver (){
+    if (parseInt(playerScore.innerHTML) === 3 || parseInt(computerScore.innerHTML) === 3){
+        return true;
+    } 
+    return false;
+}
